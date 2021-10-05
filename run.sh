@@ -25,7 +25,7 @@ docker run \
     -p ${BACKEND_PORT}:3000 \
     -v pht-ui:/usr/src/project/packages/backend/writable \
     --restart \
-    --network=pth-ui \
+    --network=pht-ui \
     --env-file ./env.backend \
     --name=uiBackend \
     ${IMAGE_NAME}:latest backend-start
