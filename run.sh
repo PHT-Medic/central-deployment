@@ -11,6 +11,9 @@ docker pull ${IMAGE_NAME}:latest
 docker stop uiFrontend && docker rm $_
 docker stop uiBackend && docker rm $_
 
+sh ./third-party/stop.sh
+sh ./third-party/start.sh
+
 docker run \
     -d \
     -p ${FRONTEND_PORT}:3000 \
