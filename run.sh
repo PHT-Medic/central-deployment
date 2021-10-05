@@ -14,18 +14,17 @@ docker stop uiBackend && docker rm $_
 docker run \
     -d \
     -p ${FRONTEND_PORT}:3000 \
-    --restart \
+    --restart=always \
     --network=pht-ui \
-    --env-file ./env.frontend \
+    --env-file .env.frontend \
     --name=uiFrontend \
     ${IMAGE_NAME}:latest frontend-start
 
 docker run \
     -d \
     -p ${BACKEND_PORT}:3000 \
-    -v pht-ui:/usr/src/project/packages/backend/writable \
-    --restart \
+    --restart=always \
     --network=pht-ui \
-    --env-file ./env.backend \
+    --env-file .env.backend \
     --name=uiBackend \
     ${IMAGE_NAME}:latest backend-start
