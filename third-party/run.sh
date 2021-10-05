@@ -1,9 +1,5 @@
 #!/bin/bash
 
-parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; cd ../; pwd -P )
-
-sh "${parent_path}/env.sh"
-
 RABBITMQ_USER_NAME="${RABBITMQ_USER_NAME:=admin}"
 RABBITMQ_USER_PASSWORD="${RABBITMQ_USER_PASSWORD:=start123}"
 
