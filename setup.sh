@@ -2,13 +2,43 @@
 
 sh ./env.sh
 
-IMAGE_NAME="${VARIABLE:=ghcr.io/tada5hi/central-ui}"
+# Image path
+IMAGE_NAME="${IMAGE_NAME:=ghcr.io/tada5hi/central-ui}"
 
+# Pull latest image
 docker pull ${IMAGE_NAME}:latest
 
-docker network create pht-network
-docker volume craete pht-central-ui-db
-docker volume create pht-central-ui-rabbitmq
+# Create docker network
+docker network create pht-ui
 
-docker run --env-file ./.env.backend ${IMAGE_NAME}:latest setup
+# Creating volumes
+docker volume create pht-ui
+docker volume create pht-ui-db
+docker volume create pht-ui-rabbitmq
 
+# Start third-party services
+sh ./third-party/run.sh
+
+HEALTH_DB_NAME=pht-u-db-health
+docker run \
+    --name ${HEALTH_DB_NAME} \
+    --health-cmd='mysqladmin ping --silent' \
+    -d \
+    mysql:5.7
+
+while ! docker exec \
+     pht-ui-db \
+     mysqladmin \
+    --user=root \
+    --password=root \
+    --host=pht-ui-db \
+     ping --silent &> /dev/null ; do
+    echo "Waiting for database connection..."
+    sleep 2
+done
+
+docker run \
+    -v pht-ui:/usr/src/project/packages/backend/writable \
+    --network=pht-ui \
+    --env-file ./.env.backend \
+    ${IMAGE_NAME}:latest setup
