@@ -31,6 +31,7 @@ DOCKER_CONTAINER_PROJECT_PATH="${DOCKER_CONTAINER_PROJECT_PATH:-"/usr/src/app"}"
 #######################################
 
 DB_ENABLED="${DB_ENABLED:-false}"
+DB_PORTS_EXPOSED="${DB_PORTS_EXPOSED:-false}"
 DB_VERSION="${DB_VERSION:-"5.7"}"
 DB_USER_PASSWORD="${DB_USER_PASSWORD:-start123}"
 
@@ -39,6 +40,7 @@ DB_USER_PASSWORD="${DB_USER_PASSWORD:-start123}"
 #######################################
 
 MQ_ENABLED="${MQ_ENABLED:-false}"
+MQ_PORTS_EXPOSED="${MQ_PORTS_EXPOSED:-false}"
 MQ_VERSION="${MQ_VERSION:-"3.8-debian-10"}"
 MQ_USER_NAME="${MQ_USER_NAME:-admin}"
 MQ_USER_PASSWORD="${MQ_USER_PASSWORD:-start123}"
@@ -48,6 +50,7 @@ MQ_USER_PASSWORD="${MQ_USER_PASSWORD:-start123}"
 #######################################
 
 REDIS_ENABLED="${REDIS_ENABLED:-false}"
+REDIS_PORTS_EXPOSED="${REDIS_PORTS_EXPOSED:-false}"
 REDIS_VERSION="${REDIS_VERSION:-"6.0-debian-10"}"
 
 #######################################
