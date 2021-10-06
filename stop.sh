@@ -12,8 +12,6 @@ if [ -n "${DOCKER_ID_FRONTEND}" ]; then
     echo "Stopping frontend..."
     docker stop "${DOCKER_ID_FRONTEND}"
     docker rm "${DOCKER_ID_FRONTEND}"
-
-    docker container rm "${DOCKER_NAME_FRONTEND}"
 else
     echo "Frontend is not running."
 fi
@@ -23,8 +21,6 @@ if [ -n "${DOCKER_ID_BACKEND}" ]; then
     echo "Stopping backend..."
     docker stop "${DOCKER_ID_BACKEND}"
     docker rm "${DOCKER_ID_BACKEND}"
-
-    docker container rm "${DOCKER_NAME_BACKEND}"
 else
     echo "Backend is not running."
 fi
