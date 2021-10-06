@@ -18,7 +18,7 @@ if [[ "${FRONTEND_ENABLED}" == true ]]; then
             -p "${FRONTEND_PORT}":3000 \
             --restart=always \
             --network="${DOCKER_NETWORK_NAME}" \
-            --env-file .env.frontend \
+            --env-file ./config/frontend/.env \
             --name="${DOCKER_NAME_FRONTEND}" \
             "${DOCKER_IMAGE_NAME}":latest frontend start
     else
@@ -35,7 +35,7 @@ if [[ "${BACKEND_ENABLED}" == true ]]; then
             -p "${BACKEND_PORT}":3000 \
             --restart=always \
             --network="${DOCKER_NETWORK_NAME}" \
-            --env-file .env.backend \
+            --env-file ./config/backend/.env \
             --name="${DOCKER_NAME_BACKEND}" \
             "${DOCKER_IMAGE_NAME}":latest backend start
     else
