@@ -11,13 +11,19 @@ function startMQ() {
     else
         echo "Service RabbitMQ starting..."
 
+         args=()
+
+        if [[ "${MQ_PORTS_EXPOSED}" == true ]]; then
+           args+=(-p 5672:5672)
+        fi
+
         docker run \
             -d \
             -v "${DOCKER_VOLUME_MQ_NAME}":/bitnami \
+            "${args[@]}" \
             --network "${DOCKER_NETWORK_NAME}" \
             --name "${DOCKER_NAME_MQ}" \
             --env-file=./config/third-party/mq/.env \
              bitnami/rabbitmq:"${MQ_VERSION}"
     fi
 }
-

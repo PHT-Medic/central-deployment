@@ -68,8 +68,8 @@ if [[ "${BACKEND_ENABLED}" == true ]]; then
     docker run \
         -v "${DOCKER_VOLUME_CORE_NAME}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/writable \
         --network="${DOCKER_NETWORK_NAME}" \
-        --env-file ./.env.backend \
-        "${DOCKER_IMAGE_NAME}":latest setup
+        --env-file ./config/backend/.env \
+        "${DOCKER_IMAGE_NAME}":latest cli setup
 fi
 
 echo "Setup complete."

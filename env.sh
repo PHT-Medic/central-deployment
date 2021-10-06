@@ -1,6 +1,6 @@
 
 if [ ! -f ./config/.env ]; then
-    copy ./config/example.env ./config/.env
+    cp ./config/example.env ./config/.env
 fi
 
 ## Main
