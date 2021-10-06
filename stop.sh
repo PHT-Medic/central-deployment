@@ -10,7 +10,10 @@ fi
 DOCKER_ID_FRONTEND=$(docker ps -qf name="${DOCKER_NAME_FRONTEND}")
 if [ -n "${DOCKER_ID_FRONTEND}" ]; then
     echo "Stopping frontend..."
-    docker stop "${DOCKER_ID_FRONTEND}" && docker rm "${DOCKER_ID_FRONTEND}"
+    docker stop "${DOCKER_ID_FRONTEND}"
+    docker rm "${DOCKER_ID_FRONTEND}"
+
+    docker container rm "${DOCKER_NAME_FRONTEND}"
 else
     echo "frontend is not running."
 fi
@@ -18,7 +21,12 @@ fi
 DOCKER_ID_BACKEND=$(docker ps -qf name="${DOCKER_NAME_BACKEND}")
 if [ -n "${DOCKER_ID_BACKEND}" ]; then
     echo "Stopping backend..."
-    docker stop "${DOCKER_ID_BACKEND}" && docker rm "${DOCKER_ID_BACKEND}"
+    docker stop "${DOCKER_ID_BACKEND}"
+    docker rm "${DOCKER_ID_BACKEND}"
+
+    docker container rm "${DOCKER_NAME_BACKEND}"
 else
     echo "backend is not running."
 fi
+
+

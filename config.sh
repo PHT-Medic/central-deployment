@@ -16,8 +16,8 @@ DOCKER_VOLUME_DB_NAME=pht-ui-db
 DOCKER_VOLUME_MQ_NAME=pht-ui-rabbitmq
 
 ### Names
-DOCKER_NAME_FRONTEND=ui-frontend
-DOCKER_NAME_BACKEND=ui-backend
+DOCKER_NAME_FRONTEND=pht-ui-frontend
+DOCKER_NAME_BACKEND=pht-ui-backend
 
 DOCKER_NAME_DB=pht-ui-db
 DOCKER_NAME_MQ=pht-ui-rabbitmq
