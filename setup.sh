@@ -55,4 +55,4 @@ docker run \
     --env-file ./.env.backend \
     "${DOCKER_IMAGE_NAME}":latest setup
 
-echo "setup complete."
+echo "Setup complete."

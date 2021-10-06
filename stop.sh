@@ -15,7 +15,7 @@ if [ -n "${DOCKER_ID_FRONTEND}" ]; then
 
     docker container rm "${DOCKER_NAME_FRONTEND}"
 else
-    echo "frontend is not running."
+    echo "Frontend is not running."
 fi
 
 DOCKER_ID_BACKEND=$(docker ps -qf name="${DOCKER_NAME_BACKEND}")
@@ -26,7 +26,7 @@ if [ -n "${DOCKER_ID_BACKEND}" ]; then
 
     docker container rm "${DOCKER_NAME_BACKEND}"
 else
-    echo "backend is not running."
+    echo "Backend is not running."
 fi
 
 
