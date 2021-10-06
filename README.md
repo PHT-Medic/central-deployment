@@ -1,16 +1,16 @@
-[![main](https://github.com/Tada5hi/pht-central-ui/actions/workflows/main.yml/badge.svg)](https://github.com/Tada5hi/pht-central-ui/actions/workflows/main.yml)
-[![Known Vulnerabilities](https://snyk.io/test/github/Tada5hi/pht-central-ui/badge.svg)](https://snyk.io/test/github/Tada5hi/pht-central-ui)
-
-# UI 🌅
-This repository contains deployment utils to deploy the Central-UI of the Personal Health Train (PHT).
+# UI Deployment 🌅
+This repository contains deployment utils to deploy a UI.
 
 ## Installation
 This package requires `docker` & `webhook` to be installed on the host machine.
 
-## Setup
-Copy the `.env.exmaple` to `.env` modify the values to your needs.
+## Configuration
+In the `config` directory copy all `.env` files and replace them without the **example** prefix in the name,
+to configure frontend, backend and the third party services.
+Change the values to your needs.
 
-To set up the project just run the following command:
+## Setup
+To set up everything just run the following command:
 ```
 $ ./setup.sh
 ```
@@ -28,6 +28,17 @@ Now you are good to go and can either wait for the Webhook to
 build and deploy the UI or manually start the Services.
 
 ## Usage
+Start frontend, backend & third party services:
 ```
-$ ./run.sh
+$ ./third-party.sh start
+$ ./start.sh
+```
+Stop frontend, backend & third party services:
+```
+$ ./third-party.sh stop
+$ ./stop.sh
+```
+Update images and service:
+```
+$ ./update.sh
 ```
