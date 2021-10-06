@@ -1,4 +1,4 @@
-# UI Deployment 🌅
+# UI Deployment 🚀
 This repository contains deployment utils to deploy a UI.
 
 ## Installation
@@ -28,17 +28,21 @@ Now you are good to go and can either wait for the Webhook to
 build and deploy the UI or manually start the Services.
 
 ## Usage
-Start frontend, backend & third party services:
+Start 🛫 frontend, backend & third party services:
 ```
 $ ./third-party.sh start
 $ ./start.sh
 ```
-Stop frontend, backend & third party services:
+Stop 🛬 frontend, backend & third party services:
 ```
 $ ./third-party.sh stop
 $ ./stop.sh
 ```
-Update images and service:
+Update 💺images and service:
 ```
 $ ./update.sh
+```
+Reset 🪂 service:
+```
+$ ./reset.sh
 ```
