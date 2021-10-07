@@ -21,7 +21,7 @@ if [ -n "${DOCKER_DB_ID}" ]; then
 fi
 
 # Stop
-sh ./stop.sh
+source ./stop.sh
 
 # Upgrade
 DOCKER_BACKEND_ID=$(docker ps -qf name="${DOCKER_NAME_BACKEND}")
@@ -42,4 +42,4 @@ fi
 echo "Project is now up to date."
 
 # Start
-sh ./stop.sh
+source ./start.sh
