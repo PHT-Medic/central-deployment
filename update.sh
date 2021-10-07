@@ -20,13 +20,16 @@ if [ -n "${DOCKER_DB_ID}" ]; then
     done
 fi
 
+# Stop
+sh ./stop.sh
+
 # Upgrade
 DOCKER_BACKEND_ID=$(docker ps -qf name="${DOCKER_NAME_BACKEND}")
 if [ -n "${DOCKER_BACKEND_ID}" ]; then
     echo "Backend is already running and will be upgraded during runtime..."
     docker exec \
         "${DOCKER_BACKEND_ID}" \
-        /bin/bash "${DOCKER_CONTAINER_PROJECT_PATH}"/entrypoint.sh cli upgrade
+        /bin/sh "${DOCKER_CONTAINER_PROJECT_PATH}"/entrypoint.sh cli upgrade
 else
     echo "Backend is going to be upgraded..."
     docker run \
@@ -37,3 +40,6 @@ else
 fi
 
 echo "Project is now up to date."
+
+# Start
+sh ./stop.sh
