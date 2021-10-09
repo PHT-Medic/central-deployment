@@ -1,47 +1,45 @@
 [
-  {
-    "id": "central-ui-webhook",
-    "execute-command": "webhook.sh",
-    "command-working-directory": "./bin",
-    "pass-arguments-to-command": [
-      {
-        "source": "payload",
-        "name": "head_commit.id"
-      },
-      {
-        "source": "payload",
-        "name": "pusher.name"
-      },
-      {
-        "source": "payload",
-        "name": "pusher.email"
-      }
-    ],
-    "trigger-rule":
     {
-      "and":
-      [
-        {
-          "match": {
-            "type": "payload-hmac-sha1",
-            "secret": "GITHUB_SECRET",
-            "parameter": {
-              "source": "header",
-              "name": "X-Hub-Signature"
-            }
-          }
-        },
-        {
-          "match": {
-            "type": "value",
-            "value": "refs/heads/master",
-            "parameter": {
-              "source": "payload",
-              "name": "ref"
-            }
-          }
+        "id": "central-ui-webhook",
+        "execute-command": "/opt/central/ui/update.sh",
+        "command-working-directory": "/opt/central/ui",
+        "trigger-rule":{
+            "and": [
+                {
+                    "match": {
+                        "type": "payload-hash-sha1",
+                        "secret": "GITHUB_SECRET",
+                        "parameter": {
+                            "source": "header",
+                            "name": "X-Hub-Signature"
+                        }
+                    }
+                },
+                {
+                    "or": [
+                        {
+                            "match": {
+                                "type": "value",
+                                "value": "refs/heads/docker",
+                                "parameter": {
+                                    "source": "payload",
+                                    "name": "ref"
+                                }
+                            }
+                        },
+                        {
+                            "match": {
+                                "type": "regex",
+                                "value": "refs/heads/v*",
+                                "parameter": {
+                                    "source": "payload",
+                                    "name": "ref"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
         }
-      ]
     }
-  }
 ]
