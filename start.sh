@@ -7,9 +7,34 @@ if [[ -z "${DOCKER_IMAGE_NAME}" ]]; then
     exit 1
 fi;
 
-docker pull "${DOCKER_IMAGE_NAME}":latest
+function usageAndExit() {
+    printf 'Usage:\n'
+    printf '  <service>\n    Start an application.\n'
+    printf '  <service> <service>\n    Start many applications\n'
+    exit 0
+}
 
-if [[ "${FRONTEND_ENABLED}" == true ]]; then
+FRONTEND="${FRONTEND_ENABLED}"
+BACKEND="${BACKEND_ENABLED}"
+
+if [[ -n "$1" ]]; then
+    FRONTEND=false
+    BACKEND=false
+
+    while [ "$1" != '' ]; do
+        case "${1}" in
+            frontend) FRONTEND=true && shift;;
+            backend) BACKEND=true && shift;;
+            *) echo "Unknown app: ${1}" && shift;;
+        esac
+    done
+
+    if [[ -z "${FRONTEND}" && -z "${BACKEND}" ]]; then
+        usageAndExit
+    fi
+fi
+
+if [[ "${FRONTEND}" == true ]]; then
     DOCKER_ID_FRONTEND=$(docker ps -qf name=^"${DOCKER_NAME_FRONTEND}"$)
     if [ -z "${DOCKER_ID_FRONTEND}" ]; then
         echo "Starting frontend..."
@@ -26,7 +51,7 @@ if [[ "${FRONTEND_ENABLED}" == true ]]; then
     fi
 fi
 
-if [[ "${BACKEND_ENABLED}" == true ]]; then
+if [[ "${BACKEND}" == true ]]; then
     DOCKER_ID_BACKEND=$(docker ps -qf name=^"${DOCKER_NAME_BACKEND}"$)
     if [ -z "${DOCKER_ID_BACKEND}" ]; then
         echo "Starting backend..."

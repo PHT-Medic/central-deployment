@@ -5,14 +5,14 @@ source ./config.sh
 sh ./stop.sh
 sh ./third-party/stop.sh
 
-# Create docker network
+# Drop docker network
 DOCKER_NETWORK_ID=$(docker network ls -qf name=^"${DOCKER_NETWORK_NAME}"$)
 if [ -n "${DOCKER_NETWORK_ID}" ]; then
     echo "Removing docker network..."
     docker network rm "${DOCKER_NETWORK_NAME}"
 fi
 
-# Creating volumes
+# Drop volumes
 DOCKER_VOLUME_CORE_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_CORE_NAME}"$)
 if [ -n "${DOCKER_VOLUME_CORE_ID}" ]; then
     echo "Removing docker core volume..."
