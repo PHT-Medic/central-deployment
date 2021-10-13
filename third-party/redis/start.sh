@@ -11,6 +11,8 @@ function startRedis() {
     else
         echo "Service Redis starting..."
 
+        docker rm "${DOCKER_NAME_REDIS}" 2> /dev/null
+
         args=()
 
         if [[ "${REDIS_PORTS_EXPOSED}" == true ]]; then

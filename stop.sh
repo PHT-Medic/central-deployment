@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./config.sh
+source ./init.sh
 
 if [[ -z "${DOCKER_NAME_FRONTEND}" || -z "${DOCKER_NAME_BACKEND}" ]]; then
     echo "Config file was not loaded..."

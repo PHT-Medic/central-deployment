@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./config.sh
+source ./init.sh
 
 if [[ -z "${DOCKER_IMAGE_NAME}" ]]; then
     echo "DOCKER_IMAGE_NAME must be provided in .env file."

@@ -7,6 +7,8 @@ function startDB() {
     else
         echo "Service DB starting..."
 
+        docker rm "${DOCKER_NAME_DB}" 2> /dev/null
+
         args=()
 
         if [[ "${MQ_PORTS_EXPOSED}" == true ]]; then

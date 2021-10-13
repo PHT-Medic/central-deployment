@@ -11,6 +11,8 @@ function startMQ() {
     else
         echo "Service RabbitMQ starting..."
 
+        docker rm "${DOCKER_NAME_MQ}" 2> /dev/null
+
          args=()
 
         if [[ "${MQ_PORTS_EXPOSED}" == true ]]; then
