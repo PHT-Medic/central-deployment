@@ -5,7 +5,7 @@
 # source ./config.sh
 
 function startMQ() {
-    DOCKER_ID=$(docker ps -qf name="${DOCKER_NAME_MQ}")
+    DOCKER_ID=$(docker ps -qf name=^"${DOCKER_NAME_MQ}"$)
     if [ -n "${DOCKER_ID}" ]; then
         echo "Service RabbitMQ is already running."
     else

@@ -5,7 +5,7 @@
 # source ./config.sh
 
 function startRedis() {
-    DOCKER_ID=$(docker ps -qf name="${DOCKER_NAME_REDIS}")
+    DOCKER_ID=$(docker ps -qf name=^"${DOCKER_NAME_REDIS}"$)
     if [ -n "${DOCKER_ID}" ]; then
         echo "Service Redis is already running."
     else

@@ -6,7 +6,7 @@ source ./config.sh
 docker pull "${DOCKER_IMAGE_NAME}":latest
 
 # Check db
-DOCKER_DB_ID=$(docker ps -qf name="${DOCKER_NAME_DB}")
+DOCKER_DB_ID=$(docker ps -qf name=^"${DOCKER_NAME_DB}"$)
 if [ -n "${DOCKER_DB_ID}" ]; then
     while ! docker exec \
          "${DOCKER_NAME_DB}" \
@@ -24,7 +24,7 @@ fi
 source ./stop.sh
 
 # Upgrade
-DOCKER_BACKEND_ID=$(docker ps -qf name="${DOCKER_NAME_BACKEND}")
+DOCKER_BACKEND_ID=$(docker ps -qf name=^"${DOCKER_NAME_BACKEND}"$)
 if [ -n "${DOCKER_BACKEND_ID}" ]; then
     echo "Backend is already running and will be upgraded during runtime..."
     docker exec \

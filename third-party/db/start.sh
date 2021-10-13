@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function startDB() {
-    DOCKER_ID=$(docker ps -qf name="${DOCKER_NAME_DB}")
+    DOCKER_ID=$(docker ps -qf name=^"${DOCKER_NAME_DB}"$)
     if [ -n "${DOCKER_ID}" ]; then
         echo "Service DB is already running."
     else
