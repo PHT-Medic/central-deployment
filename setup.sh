@@ -8,7 +8,7 @@ if [[ -z "${DOCKER_IMAGE_NAME}" ]]; then
 fi;
 
 # Pull image
-docker pull "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}"
+docker pull "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
 
 # Create docker network
 DOCKER_NETWORK_ID=$(docker network ls -qf name=^"${DOCKER_NETWORK_NAME}"$)
