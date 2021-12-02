@@ -3,7 +3,7 @@
 source ./config.sh
 
 sh ./stop.sh
-sh ./third-party/stop.sh
+sh ./third-party.sh stop
 
 # Drop docker network
 DOCKER_NETWORK_ID=$(docker network ls -qf name=^"${DOCKER_NETWORK_NAME}"$)

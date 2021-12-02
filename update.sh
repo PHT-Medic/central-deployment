@@ -2,8 +2,8 @@
 
 source ./init.sh
 
-# Pull latest image
-docker pull "${DOCKER_IMAGE_NAME}":latest
+# Pull image
+docker pull "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}"
 
 # Check db
 DOCKER_DB_ID=$(docker ps -qf name=^"${DOCKER_NAME_DB}"$)
@@ -36,7 +36,7 @@ else
         -v "${DOCKER_VOLUME_CORE_NAME}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/writable \
         --network="${DOCKER_NETWORK_NAME}" \
         --env-file ./config/backend/.env \
-        "${DOCKER_IMAGE_NAME}":latest cli upgrade
+        "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" cli upgrade
 fi
 
 echo "Project is now up to date."

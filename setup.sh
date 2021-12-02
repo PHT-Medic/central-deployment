@@ -7,8 +7,8 @@ if [[ -z "${DOCKER_IMAGE_NAME}" ]]; then
     exit 1
 fi;
 
-# Pull latest image
-docker pull "${DOCKER_IMAGE_NAME}":latest
+# Pull image
+docker pull "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}"
 
 # Create docker network
 DOCKER_NETWORK_ID=$(docker network ls -qf name=^"${DOCKER_NETWORK_NAME}"$)
@@ -69,7 +69,7 @@ if [[ "${BACKEND_ENABLED}" == true ]]; then
         -v "${DOCKER_VOLUME_CORE_NAME}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/writable \
         --network="${DOCKER_NETWORK_NAME}" \
         --env-file ./config/backend/.env \
-        "${DOCKER_IMAGE_NAME}":latest cli setup
+        "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" cli setup
 fi
 
 echo "completed."

@@ -45,7 +45,7 @@ if [[ "${FRONTEND}" == true ]]; then
             --network="${DOCKER_NETWORK_NAME}" \
             --env-file ./config/frontend/.env \
             --name="${DOCKER_NAME_FRONTEND}" \
-            "${DOCKER_IMAGE_NAME}":latest frontend start
+            "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" frontend start
     else
         echo "Frontend is already running."
     fi
@@ -63,7 +63,7 @@ if [[ "${BACKEND}" == true ]]; then
             --network="${DOCKER_NETWORK_NAME}" \
             --env-file ./config/backend/.env \
             --name="${DOCKER_NAME_BACKEND}" \
-            "${DOCKER_IMAGE_NAME}":latest backend start
+            "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" backend start
     else
         echo "Backend is already running."
     fi

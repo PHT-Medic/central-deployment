@@ -26,6 +26,10 @@ DOCKER_NAME_MQ="${DOCKER_NAME_MQ:-ui-mq}"
 ### Path
 DOCKER_CONTAINER_PROJECT_PATH="${DOCKER_CONTAINER_PROJECT_PATH:-"/usr/src/app"}"
 
+## Image
+
+DOCKER_IMAGE_TAG="${DOCKER_IMAGE_TAG:-latest}"
+
 #######################################
 ## DB Service
 #######################################
