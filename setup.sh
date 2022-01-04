@@ -48,6 +48,17 @@ if [[ "${MQ_ENABLED}" == true ]]; then
     startMQ
 fi
 
+if [[ "${REDIS_ENABLED}" == true ]]; then
+    DOCKER_VOLUME_REDIS_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_REDIS_NAME}"$)
+    if [ -z "${DOCKER_VOLUME_REDIS_ID}" ]; then
+        echo "Creating docker rabbit-mq volume..."
+        docker volume create "${DOCKER_VOLUME_REDIS_NAME}"
+    fi
+
+    source ./third-party/redis/start.sh
+    startRedis
+fi
+
 if [[ "${DB_ENABLED}" == true ]]; then
     DOCKER_DB_ID=$(docker ps -qf name=^"${DOCKER_NAME_DB}"$)
     if [ -n "${DOCKER_DB_ID}" ]; then
