@@ -78,7 +78,7 @@ if [[ "${REALTIME}" == true ]]; then
         echo "starting realtime-server..."
         docker run \
             -d \
-            -p "${BACKEND_PORT}":3000 \
+            -p "${REALTIME_PORT}":3000 \
             --restart=always \
             --network="${DOCKER_NETWORK_NAME}" \
             --env-file ./config/realtime/.env \
