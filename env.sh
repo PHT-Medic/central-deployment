@@ -14,6 +14,12 @@ then
     cp ./config/backend/example.env ./config/backend/.env
 fi
 
+## Realtime
+if [[ "${REALTIME_ENABLED}" == true && ! -f ./config/realtime/.env ]]
+then
+    cp ./config/realtime/example.env ./config/realtime/.env
+fi
+
 ## Frontend
 if [[ "${FRONTEND_ENABLED}" == true &&  ! -f ./config/frontend/.env ]]
 then
