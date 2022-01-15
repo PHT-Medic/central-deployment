@@ -43,3 +43,9 @@ if [[ "${REDIS_ENABLED}" == true &&  ! -f ./config/third-party/redis/.env ]]
 then
     cp ./config/third-party/redis/example.env ./config/third-party/redis/.env
 fi
+
+## VAULT
+if [[ "${VAULT_ENABLED}" == true &&  ! -f ./config/third-party/vault/.env ]]
+then
+    cp ./config/third-party/vault/example.env ./config/third-party/vault/.env
+fi

@@ -21,7 +21,7 @@ function startRedis() {
 
         docker run \
             -d \
-            -v "${DOCKER_VOLUME_NAME_REDIS}":/bitnami \
+            -v "${DOCKER_VOLUME_REDIS_NAME}":/bitnami \
             "${args[@]}" \
             --network "${DOCKER_NETWORK_NAME}" \
             --name "${DOCKER_NAME_REDIS}" \

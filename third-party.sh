@@ -28,22 +28,25 @@ shift
 DB_SERVICE="${DB_ENABLED}"
 MQ_SERVICE="${MQ_ENABLED}"
 REDIS_SERVICE="${REDIS_ENABLED}"
+VAULT_ENABLED="${VAULT_ENABLED}"
 
 if [[ -n "$1" ]]; then
     DB_SERVICE=false
     MQ_SERVICE=false
     REDIS_SERVICE=false
+    VAULT_SERVICE=false
 
     while [ "$1" != '' ]; do
         case "${1}" in
             db) DB_SERVICE=true && shift;;
             mq) MQ_SERVICE=true && shift;;
             redis) REDIS_SERVICE=true && shift;;
+            vault) VAULT_SERVICE=true && shift;;
             *) echo "Unknown service: ${1}" && shift;;
         esac
     done
 
-    if [[ -z "${DB_SERVICE}" && -z "${MQ_SERVICE}" && -z "${REDIS_SERVICE}" ]]; then
+    if [[ -z "${DB_SERVICE}" && -z "${MQ_SERVICE}" && -z "${REDIS_SERVICE}" && -z "${VAULT_SERVICE}" ]]; then
         usageAndExit
     fi
 fi
@@ -67,5 +70,12 @@ if [[ "${REDIS_SERVICE}" == true ]]; then
     case "${COMMAND}" in
         start) source ./third-party/redis/start.sh && startRedis;;
         stop) source ./third-party/redis/stop.sh && stopRedis;;
+    esac
+fi
+
+if [[ "${VAULT_SERVICE}" == true ]]; then
+    case "${COMMAND}" in
+        start) source ./third-party/vault/start.sh && startVault;;
+        stop) source ./third-party/vault/stop.sh && stopVault;;
     esac
 fi

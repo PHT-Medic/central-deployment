@@ -35,3 +35,13 @@ if [[ "${MQ_ENABLED}" == true ]]; then
         docker volume create "${DOCKER_VOLUME_MQ_NAME}"
     fi
 fi
+
+if [[ "${VAULT_ENABLED}" == true ]]; then
+    DOCKER_VOLUME_VAULT_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_VAULT_NAME}"$)
+    if [ -z "${DOCKER_VOLUME_VAULT_ID}" ]; then
+        echo "Creating docker vault volume..."
+        docker volume create "${DOCKER_VOLUME_VAULT_NAME}"
+    fi
+fi
+
+
