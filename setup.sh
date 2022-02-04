@@ -59,6 +59,17 @@ if [[ "${REDIS_ENABLED}" == true ]]; then
     startRedis
 fi
 
+if [[ "${VAULT_ENABLED}" == true ]]; then
+    DOCKER_VOLUME_VAULT_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_VAULT_NAME}"$)
+    if [ -z "${DOCKER_VOLUME_VAULT_ID}" ]; then
+        echo "Creating docker rabbit-mq volume..."
+        docker volume create "${DOCKER_VOLUME_VAULT_NAME}"
+    fi
+
+    source ./third-party/vault/start.sh
+    startVault
+fi
+
 if [[ "${DB_ENABLED}" == true ]]; then
     DOCKER_DB_ID=$(docker ps -qf name=^"${DOCKER_NAME_DB}"$)
     if [ -n "${DOCKER_DB_ID}" ]; then

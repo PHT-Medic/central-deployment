@@ -19,6 +19,13 @@ if [ -n "${DOCKER_VOLUME_CORE_ID}" ]; then
     docker volume rm "${DOCKER_VOLUME_CORE_NAME}"
 fi
 
+DOCKER_VOLUME_RESULT_SERVICE_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_RESULT_SERVICE_NAME}"$)
+if [ -z "${DOCKER_VOLUME_RESULT_SERVICE_ID}" ]; then
+    echo "Removing docker result-service volume..."
+    docker volume rm "${DOCKER_VOLUME_RESULT_SERVICE_ID}"
+fi
+
+
 DOCKER_VOLUME_DB_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_DB_NAME}"$)
 if [ -n "${DOCKER_VOLUME_DB_ID}" ]; then
     echo "Removing docker db volume..."

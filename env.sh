@@ -20,6 +20,12 @@ then
     cp ./config/realtime/example.env ./config/realtime/.env
 fi
 
+## Result Service
+if [[ "${RESULT_SERVICE_ENABLED}" == true && ! -f ./config/result-service/.env ]]
+then
+    cp ./config/result-service/example.env ./config/result-service/.env
+fi
+
 ## Frontend
 if [[ "${FRONTEND_ENABLED}" == true &&  ! -f ./config/frontend/.env ]]
 then
