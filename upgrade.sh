@@ -26,12 +26,12 @@ source ./stop.sh
 # Upgrade
 DOCKER_API_ID=$(docker ps -qf name=^"${DOCKER_NAME_API}"$)
 if [ -n "${DOCKER_API_ID}" ]; then
-    echo "API is already running and will be upgraded during runtime..."
+    echo "api-server is already running and will be upgraded during runtime..."
     docker exec \
         "${DOCKER_API_ID}" \
         /bin/sh "${DOCKER_CONTAINER_PROJECT_PATH}"/entrypoint.sh cli upgrade
 else
-    echo "API is going to be upgraded..."
+    echo "api-server is going to be upgraded..."
     docker run \
         -v "${DOCKER_VOLUME_NAME_API}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/api/writable \
         --network="${DOCKER_NETWORK_NAME}" \
@@ -39,7 +39,7 @@ else
         "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" cli upgrade
 fi
 
-echo "Project is now up to date."
+echo "project is now up to date."
 
 # Start
 source ./start.sh
