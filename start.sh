@@ -99,7 +99,7 @@ if [[ "${RESULT_SERVICE}" == true ]]; then
         docker run \
             -d \
             -v "${DOCKER_VOLUME_RESULT_SERVICE_NAME}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/result-service/writable \
-            -p "${REALTIME_PORT}":3000 \
+            -p "${RESULT_SERVICE_PORT}":3000 \
             --restart=always \
             --network="${DOCKER_NETWORK_NAME}" \
             --env-file ./config/result-service/.env \
