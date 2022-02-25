@@ -17,12 +17,12 @@ if [ -z "${DOCKER_NETWORK_ID}" ]; then
     docker network create "${DOCKER_NETWORK_NAME}"
 fi
 
-if [[ "${BACKEND_ENABLED}" == true ]]; then
+if [[ "${ENABLED_API}" == true ]]; then
     # Creating volumes
-    DOCKER_VOLUME_CORE_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_CORE_NAME}"$)
-    if [ -z "${DOCKER_VOLUME_CORE_ID}" ]; then
+    DOCKER_VOLUME_ID_API=$(docker volume ls -qf name=^"${DOCKER_VOLUME_NAME_API}"$)
+    if [ -z "${DOCKER_VOLUME_ID_API}" ]; then
         echo "Creating docker core volume..."
-        docker volume create "${DOCKER_VOLUME_CORE_NAME}"
+        docker volume create "${DOCKER_VOLUME_NAME_API}"
     fi
 fi
 
@@ -86,11 +86,11 @@ if [[ "${DB_ENABLED}" == true ]]; then
     fi
 fi
 
-if [[ "${BACKEND_ENABLED}" == true ]]; then
+if [[ "${ENABLED_API}" == true ]]; then
     docker run \
-        -v "${DOCKER_VOLUME_CORE_NAME}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/writable \
+        -v "${DOCKER_VOLUME_NAME_API}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/api/writable \
         --network="${DOCKER_NETWORK_NAME}" \
-        --env-file ./config/backend/.env \
+        --env-file ./config/api/.env \
         "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" cli setup
 fi
 

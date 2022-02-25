@@ -9,9 +9,9 @@ if [ -f ./config/.env ]; then
 fi
 
 ## Backend
-if [[ "${BACKEND_ENABLED}" == true && ! -f ./config/backend/.env ]]
+if [[ "${ENABLED_API}" == true && ! -f ./config/api/.env ]]
 then
-    cp ./config/backend/example.env ./config/backend/.env
+    cp ./config/api/example.env ./config/api/.env
 fi
 
 ## Realtime
@@ -21,15 +21,15 @@ then
 fi
 
 ## Result Service
-if [[ "${RESULT_SERVICE_ENABLED}" == true && ! -f ./config/result-service/.env ]]
+if [[ "${ENABLED_RESULT}" == true && ! -f ./config/result/.env ]]
 then
-    cp ./config/result-service/example.env ./config/result-service/.env
+    cp ./config/result/example.env ./config/result/.env
 fi
 
 ## Frontend
-if [[ "${FRONTEND_ENABLED}" == true &&  ! -f ./config/frontend/.env ]]
+if [[ "${ENABLED_UI}" == true &&  ! -f ./config/ui/.env ]]
 then
-    cp ./config/frontend/example.env ./config/frontend/.env
+    cp ./config/ui/example.env ./config/ui/.env
 fi
 
 ## DB

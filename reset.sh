@@ -13,16 +13,16 @@ if [ -n "${DOCKER_NETWORK_ID}" ]; then
 fi
 
 # Drop volumes
-DOCKER_VOLUME_CORE_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_CORE_NAME}"$)
-if [ -n "${DOCKER_VOLUME_CORE_ID}" ]; then
+DOCKER_VOLUME_ID_API=$(docker volume ls -qf name=^"${DOCKER_VOLUME_NAME_API}"$)
+if [ -n "${DOCKER_VOLUME_ID_API}" ]; then
     echo "Removing docker core volume..."
-    docker volume rm "${DOCKER_VOLUME_CORE_NAME}"
+    docker volume rm "${DOCKER_VOLUME_NAME_API}"
 fi
 
-DOCKER_VOLUME_RESULT_SERVICE_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_RESULT_SERVICE_NAME}"$)
-if [ -z "${DOCKER_VOLUME_RESULT_SERVICE_ID}" ]; then
+DOCKER_VOLUME_RESULT_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_NAME_RESULT}"$)
+if [ -z "${DOCKER_VOLUME_RESULT_ID}" ]; then
     echo "Removing docker result-service volume..."
-    docker volume rm "${DOCKER_VOLUME_RESULT_SERVICE_ID}"
+    docker volume rm "${DOCKER_VOLUME_RESULT_ID}"
 fi
 
 

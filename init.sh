@@ -11,21 +11,21 @@ else
     echo "Docker network already exists."
 fi
 
-if [[ "${BACKEND_ENABLED}" == true ]]; then
+if [[ "${ENABLED_API}" == true ]]; then
     # Creating volumes
-    DOCKER_VOLUME_CORE_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_CORE_NAME}"$)
-    if [ -z "${DOCKER_VOLUME_CORE_ID}" ]; then
+    DOCKER_VOLUME_ID_API=$(docker volume ls -qf name=^"${DOCKER_VOLUME_NAME_API}"$)
+    if [ -z "${DOCKER_VOLUME_ID_API}" ]; then
         echo "Creating docker core volume..."
-        docker volume create "${DOCKER_VOLUME_CORE_NAME}"
+        docker volume create "${DOCKER_VOLUME_NAME_API}"
     fi
 fi
 
-if [[ "${RESULT_SERVICE_ENABLED}" == true ]]; then
+if [[ "${ENABLED_RESULT}" == true ]]; then
     # Creating volumes
-    DOCKER_VOLUME_RESULT_SERVICE_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_RESULT_SERVICE_NAME}"$)
-    if [ -z "${DOCKER_VOLUME_RESULT_SERVICE_ID}" ]; then
+    DOCKER_VOLUME_RESULT_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_NAME_RESULT}"$)
+    if [ -z "${DOCKER_VOLUME_RESULT_ID}" ]; then
         echo "Creating docker result-service volume..."
-        docker volume create "${DOCKER_VOLUME_CORE_NAME}"
+        docker volume create "${DOCKER_VOLUME_NAME_API}"
     fi
 fi
 

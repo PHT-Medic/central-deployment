@@ -24,18 +24,18 @@ fi
 source ./stop.sh
 
 # Upgrade
-DOCKER_BACKEND_ID=$(docker ps -qf name=^"${DOCKER_NAME_BACKEND}"$)
-if [ -n "${DOCKER_BACKEND_ID}" ]; then
-    echo "Backend is already running and will be upgraded during runtime..."
+DOCKER_API_ID=$(docker ps -qf name=^"${DOCKER_NAME_API}"$)
+if [ -n "${DOCKER_API_ID}" ]; then
+    echo "API is already running and will be upgraded during runtime..."
     docker exec \
-        "${DOCKER_BACKEND_ID}" \
+        "${DOCKER_API_ID}" \
         /bin/sh "${DOCKER_CONTAINER_PROJECT_PATH}"/entrypoint.sh cli upgrade
 else
-    echo "Backend is going to be upgraded..."
+    echo "API is going to be upgraded..."
     docker run \
-        -v "${DOCKER_VOLUME_CORE_NAME}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/writable \
+        -v "${DOCKER_VOLUME_NAME_API}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/api/writable \
         --network="${DOCKER_NETWORK_NAME}" \
-        --env-file ./config/backend/.env \
+        --env-file ./config/api/.env \
         "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" cli upgrade
 fi
 

@@ -9,51 +9,51 @@ function usageAndExit() {
     exit 0
 }
 
-FRONTEND="${FRONTEND_ENABLED}"
+UI="${ENABLED_UI}"
 REALTIME="${REALTIME_ENABLED}"
-BACKEND="${BACKEND_ENABLED}"
-RESULT_SERVICE="${RESULT_SERVICE_ENABLED}"
+API="${ENABLED_API}"
+RESULT="${ENABLED_RESULT}"
 
 if [[ -n "$1" ]]; then
-    FRONTEND=false
+    UI=false
     REALTIME=false
-    BACKEND=false
-    RESULT_SERVICE=false
+    API=false
+    RESULT=false
 
     while [ "$1" != '' ]; do
         case "${1}" in
-            frontend) FRONTEND=true && shift;;
+            ui) UI=true && shift;;
             realtime) REALTIME=true && shift;;
-            backend) BACKEND=true && shift;;
-            result-service) RESULT_SERVICE=true && shift;;
+            api) API=true && shift;;
+            result) RESULT=true && shift;;
             *) echo "Unknown app: ${1}" && shift;;
         esac
     done
 
-    if [[ -z "${FRONTEND}" && -z "${BACKEND}" && -z "${REALTIME}" && -z "${RESULT_SERVICE}" ]]; then
+    if [[ -z "${UI}" && -z "${API}" && -z "${REALTIME}" && -z "${RESULT}" ]]; then
         usageAndExit
     fi
 fi
 
-if [[ "${FRONTEND}" == true ]]; then
-    DOCKER_ID_FRONTEND=$(docker ps -qf name=^"${DOCKER_NAME_FRONTEND}"$)
-    if [ -n "${DOCKER_ID_FRONTEND}" ]; then
-        echo "stopping frontend..."
-        docker stop "${DOCKER_ID_FRONTEND}"
-        docker rm "${DOCKER_ID_FRONTEND}"
+if [[ "${UI}" == true ]]; then
+    DOCKER_ID_UI=$(docker ps -qf name=^"${DOCKER_NAME_UI}"$)
+    if [ -n "${DOCKER_ID_UI}" ]; then
+        echo "stopping ui..."
+        docker stop "${DOCKER_ID_UI}"
+        docker rm "${DOCKER_ID_UI}"
     else
-        echo "frontend is not running."
+        echo "ui is not running."
     fi
 fi
 
-if [[ "${BACKEND}" == true ]]; then
-    DOCKER_ID_BACKEND=$(docker ps -qf name=^"${DOCKER_NAME_BACKEND}"$)
-    if [ -n "${DOCKER_ID_BACKEND}" ]; then
-        echo "stopping resource-server..."
-        docker stop "${DOCKER_ID_BACKEND}"
-        docker rm "${DOCKER_ID_BACKEND}"
+if [[ "${API}" == true ]]; then
+    DOCKER_ID_API=$(docker ps -qf name=^"${DOCKER_NAME_API}"$)
+    if [ -n "${DOCKER_ID_API}" ]; then
+        echo "stopping api-server..."
+        docker stop "${DOCKER_ID_API}"
+        docker rm "${DOCKER_ID_API}"
     else
-        echo "resource-server is not running."
+        echo "api-server is not running."
     fi
 fi
 
@@ -68,13 +68,13 @@ if [[ "${REALTIME}" == true ]]; then
     fi
 fi
 
-if [[ "${RESULT_SERVICE}" == true ]]; then
-    DOCKER_ID_RESULT_SERVICE=$(docker ps -qf name=^"${DOCKER_NAME_RESULT_SERVICE}"$)
-    if [ -n "${DOCKER_ID_RESULT_SERVICE}" ]; then
-        echo "stopping result-service..."
-        docker stop "${DOCKER_ID_RESULT_SERVICE}"
-        docker rm "${DOCKER_ID_RESULT_SERVICE}"
+if [[ "${RESULT}" == true ]]; then
+    DOCKER_ID_RESULT=$(docker ps -qf name=^"${DOCKER_NAME_RESULT}"$)
+    if [ -n "${DOCKER_ID_RESULT}" ]; then
+        echo "stopping result-server..."
+        docker stop "${DOCKER_ID_RESULT}"
+        docker rm "${DOCKER_ID_RESULT}"
     else
-        echo "result-service is not running."
+        echo "result-server is not running."
     fi
 fi

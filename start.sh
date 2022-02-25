@@ -14,64 +14,64 @@ function usageAndExit() {
     exit 0
 }
 
-FRONTEND="${FRONTEND_ENABLED}"
+UI="${ENABLED_UI}"
 REALTIME="${REALTIME_ENABLED}"
-BACKEND="${BACKEND_ENABLED}"
-RESULT_SERVICE="${RESULT_SERVICE_ENABLED}"
+API="${ENABLED_API}"
+RESULT="${ENABLED_RESULT}"
 
 if [[ -n "$1" ]]; then
-    FRONTEND=false
+    UI=false
     REALTIME=false
-    BACKEND=false
-    RESULT_SERVICE=false
+    API=false
+    RESULT=false
 
     while [ "$1" != '' ]; do
         case "${1}" in
-            frontend) FRONTEND=true && shift;;
+            ui) UI=true && shift;;
             realtime) REALTIME=true && shift;;
-            backend) BACKEND=true && shift;;
-            result-service) RESULT_SERVICE=true && shift;;
+            api) API=true && shift;;
+            result) RESULT=true && shift;;
             *) echo "Unknown app: ${1}" && shift;;
         esac
     done
 
-    if [[ -z "${FRONTEND}" && -z "${BACKEND}" && -z "${REALTIME}" && -z "${RESULT_SERVICE}" ]]; then
+    if [[ -z "${UI}" && -z "${API}" && -z "${REALTIME}" && -z "${RESULT}" ]]; then
         usageAndExit
     fi
 fi
 
-if [[ "${FRONTEND}" == true ]]; then
-    DOCKER_ID_FRONTEND=$(docker ps -qf name=^"${DOCKER_NAME_FRONTEND}"$)
-    if [ -z "${DOCKER_ID_FRONTEND}" ]; then
-        echo "starting frontend..."
+if [[ "${UI}" == true ]]; then
+    DOCKER_ID_UI=$(docker ps -qf name=^"${DOCKER_NAME_UI}"$)
+    if [ -z "${DOCKER_ID_UI}" ]; then
+        echo "starting ui..."
         docker run \
             -d \
-            -p "${FRONTEND_PORT}":3000 \
+            -p "${UI_PORT}":3000 \
             --restart=always \
             --network="${DOCKER_NETWORK_NAME}" \
-            --env-file ./config/frontend/.env \
-            --name="${DOCKER_NAME_FRONTEND}" \
-            "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" frontend start
+            --env-file ./config/ui/.env \
+            --name="${DOCKER_NAME_UI}" \
+            "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" ui start
     else
-        echo "frontend is already running."
+        echo "ui is already running."
     fi
 fi
 
-if [[ "${BACKEND}" == true ]]; then
-    DOCKER_ID_BACKEND=$(docker ps -qf name=^"${DOCKER_NAME_BACKEND}"$)
-    if [ -z "${DOCKER_ID_BACKEND}" ]; then
-        echo "starting resource-server..."
+if [[ "${API}" == true ]]; then
+    DOCKER_ID_API=$(docker ps -qf name=^"${DOCKER_NAME_API}"$)
+    if [ -z "${DOCKER_ID_API}" ]; then
+        echo "starting api-server..."
         docker run \
             -d \
-            -v "${DOCKER_VOLUME_CORE_NAME}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/writable \
-            -p "${BACKEND_PORT}":3000 \
+            -v "${DOCKER_VOLUME_NAME_API}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/api/writable \
+            -p "${PORT_API}":3000 \
             --restart=always \
             --network="${DOCKER_NETWORK_NAME}" \
-            --env-file ./config/backend/.env \
-            --name="${DOCKER_NAME_BACKEND}" \
-            "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" backend start
+            --env-file ./config/api/.env \
+            --name="${DOCKER_NAME_API}" \
+            "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" api start
     else
-        echo "resource-server is already running."
+        echo "api-server is already running."
     fi
 fi
 
@@ -92,20 +92,20 @@ if [[ "${REALTIME}" == true ]]; then
     fi
 fi
 
-if [[ "${RESULT_SERVICE}" == true ]]; then
-    DOCKER_ID_RESULT_SERVICE=$(docker ps -qf name=^"${DOCKER_NAME_RESULT_SERVICE}"$)
-    if [ -z "${DOCKER_ID_RESULT_SERVICE}" ]; then
-        echo "starting result-service..."
+if [[ "${RESULT}" == true ]]; then
+    DOCKER_ID_RESULT=$(docker ps -qf name=^"${DOCKER_NAME_RESULT}"$)
+    if [ -z "${DOCKER_ID_RESULT}" ]; then
+        echo "starting result-server..."
         docker run \
             -d \
-            -v "${DOCKER_VOLUME_RESULT_SERVICE_NAME}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/result-service/writable \
-            -p "${RESULT_SERVICE_PORT}":3000 \
+            -v "${DOCKER_VOLUME_NAME_RESULT}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/result/writable \
+            -p "${PORT_RESULT}":3000 \
             --restart=always \
             --network="${DOCKER_NETWORK_NAME}" \
-            --env-file ./config/result-service/.env \
-            --name="${DOCKER_NAME_RESULT_SERVICE}" \
-            "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" result-service start
+            --env-file ./config/result/.env \
+            --name="${DOCKER_NAME_RESULT}" \
+            "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" result start
     else
-        echo "result-service is already running."
+        echo "result-server is already running."
     fi
 fi
