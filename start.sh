@@ -98,6 +98,7 @@ if [[ "${RESULT}" == true ]]; then
         echo "starting result-server..."
         docker run \
             -d \
+            -v /var/run/docker.sock:/var/run/docker.sock \
             -v "${DOCKER_VOLUME_NAME_RESULT}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/result/writable \
             -p "${PORT_RESULT}":3000 \
             --restart=always \
