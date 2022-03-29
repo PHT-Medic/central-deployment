@@ -15,7 +15,7 @@ function usageAndExit() {
 }
 
 UI="${ENABLED_UI}"
-REALTIME="${REALTIME_ENABLED}"
+REALTIME="${ENABLED_REALTIME}"
 API="${ENABLED_API}"
 RESULT="${ENABLED_RESULT}"
 
@@ -81,7 +81,7 @@ if [[ "${REALTIME}" == true ]]; then
         echo "starting realtime-server..."
         docker run \
             -d \
-            -p "${REALTIME_PORT}":3000 \
+            -p "${PORT_REALTIME}":3000 \
             --restart=always \
             --network="${DOCKER_NETWORK_NAME}" \
             --env-file ./config/realtime/.env \

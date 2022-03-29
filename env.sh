@@ -15,7 +15,7 @@ then
 fi
 
 ## Realtime
-if [[ "${REALTIME_ENABLED}" == true && ! -f ./config/realtime/.env ]]
+if [[ "${ENABLED_REALTIME}" == true && ! -f ./config/realtime/.env ]]
 then
     cp ./config/realtime/example.env ./config/realtime/.env
 fi
