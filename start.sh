@@ -17,25 +17,25 @@ function usageAndExit() {
 UI="${ENABLED_UI}"
 REALTIME="${ENABLED_REALTIME}"
 API="${ENABLED_API}"
-RESULT="${ENABLED_RESULT}"
+TRAIN-MANAGER="${ENABLED_TRAIN_MANAGER}"
 
 if [[ -n "$1" ]]; then
     UI=false
     REALTIME=false
     API=false
-    RESULT=false
+    TRAIN-MANAGER=false
 
     while [ "$1" != '' ]; do
         case "${1}" in
             ui) UI=true && shift;;
             realtime) REALTIME=true && shift;;
             api) API=true && shift;;
-            result) RESULT=true && shift;;
+            train-manager) TRAIN-MANAGER=true && shift;;
             *) echo "Unknown app: ${1}" && shift;;
         esac
     done
 
-    if [[ -z "${UI}" && -z "${API}" && -z "${REALTIME}" && -z "${RESULT}" ]]; then
+    if [[ -z "${UI}" && -z "${API}" && -z "${REALTIME}" && -z "${TRAIN-MANAGER}" ]]; then
         usageAndExit
     fi
 fi
@@ -92,21 +92,21 @@ if [[ "${REALTIME}" == true ]]; then
     fi
 fi
 
-if [[ "${RESULT}" == true ]]; then
-    DOCKER_ID_RESULT=$(docker ps -qf name=^"${DOCKER_NAME_RESULT}"$)
-    if [ -z "${DOCKER_ID_RESULT}" ]; then
-        echo "starting result-server..."
+if [[ "${TRAIN-MANAGER}" == true ]]; then
+    DOCKER_ID_TRAIN_MANAGER=$(docker ps -qf name=^"${DOCKER_NAME_TRAIN_MANAGER}"$)
+    if [ -z "${DOCKER_ID_TRAIN_MANAGER}" ]; then
+        echo "starting train-manager..."
         docker run \
             -d \
             -v /var/run/docker.sock:/var/run/docker.sock \
-            -v "${DOCKER_VOLUME_NAME_RESULT}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/result/writable \
-            -p "${PORT_RESULT}":3000 \
+            -v "${DOCKER_VOLUME_NAME_TRAIN_MANAGER}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/train-manager/writable \
+            -p "${PORT_TRAIN_MANAGER}":3000 \
             --restart=always \
             --network="${DOCKER_NETWORK_NAME}" \
-            --env-file ./config/result/.env \
-            --name="${DOCKER_NAME_RESULT}" \
-            "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" result start
+            --env-file ./config/train-manager/.env \
+            --name="${DOCKER_NAME_TRAIN_MANAGER}" \
+            "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" train-manager start
     else
-        echo "result-server is already running."
+        echo "train-manager is already running."
     fi
 fi

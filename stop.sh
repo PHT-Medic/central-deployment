@@ -12,25 +12,25 @@ function usageAndExit() {
 UI="${ENABLED_UI}"
 REALTIME="${ENABLED_REALTIME}"
 API="${ENABLED_API}"
-RESULT="${ENABLED_RESULT}"
+TRAIN-MANAGER="${ENABLED_TRAIN_MANAGER}"
 
 if [[ -n "$1" ]]; then
     UI=false
     REALTIME=false
     API=false
-    RESULT=false
+    TRAIN-MANAGER=false
 
     while [ "$1" != '' ]; do
         case "${1}" in
             ui) UI=true && shift;;
             realtime) REALTIME=true && shift;;
             api) API=true && shift;;
-            result) RESULT=true && shift;;
+            train-manager) TRAIN-MANAGER=true && shift;;
             *) echo "Unknown app: ${1}" && shift;;
         esac
     done
 
-    if [[ -z "${UI}" && -z "${API}" && -z "${REALTIME}" && -z "${RESULT}" ]]; then
+    if [[ -z "${UI}" && -z "${API}" && -z "${REALTIME}" && -z "${TRAIN-MANAGER}" ]]; then
         usageAndExit
     fi
 fi
@@ -68,13 +68,13 @@ if [[ "${REALTIME}" == true ]]; then
     fi
 fi
 
-if [[ "${RESULT}" == true ]]; then
-    DOCKER_ID_RESULT=$(docker ps -qf name=^"${DOCKER_NAME_RESULT}"$)
-    if [ -n "${DOCKER_ID_RESULT}" ]; then
-        echo "stopping result-server..."
-        docker stop "${DOCKER_ID_RESULT}"
-        docker rm "${DOCKER_ID_RESULT}"
+if [[ "${TRAIN-MANAGER}" == true ]]; then
+    DOCKER_ID_TRAIN_MANAGER=$(docker ps -qf name=^"${DOCKER_NAME_TRAIN_MANAGER}"$)
+    if [ -n "${DOCKER_ID_TRAIN_MANAGER}" ]; then
+        echo "stopping train-manager..."
+        docker stop "${DOCKER_ID_TRAIN_MANAGER}"
+        docker rm "${DOCKER_ID_TRAIN_MANAGER}"
     else
-        echo "result-server is not running."
+        echo "train-manager is not running."
     fi
 fi

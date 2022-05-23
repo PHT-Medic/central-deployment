@@ -20,11 +20,11 @@ if [[ "${ENABLED_API}" == true ]]; then
     fi
 fi
 
-if [[ "${ENABLED_RESULT}" == true ]]; then
+if [[ "${ENABLED_TRAIN_MANAGER}" == true ]]; then
     # Creating volumes
-    DOCKER_VOLUME_RESULT_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_NAME_RESULT}"$)
-    if [ -z "${DOCKER_VOLUME_RESULT_ID}" ]; then
-        echo "Creating docker result-service volume..."
+    DOCKER_VOLUME_ID_TRAIN_MANAGER=$(docker volume ls -qf name=^"${DOCKER_VOLUME_NAME_TRAIN_MANAGER}"$)
+    if [ -z "${DOCKER_VOLUME_ID_TRAIN_MANAGER}" ]; then
+        echo "Creating docker train-manager volume..."
         docker volume create "${DOCKER_VOLUME_NAME_API}"
     fi
 fi

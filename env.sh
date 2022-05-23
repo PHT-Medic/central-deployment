@@ -20,10 +20,10 @@ then
     cp ./config/realtime/example.env ./config/realtime/.env
 fi
 
-## Result Service
-if [[ "${ENABLED_RESULT}" == true && ! -f ./config/result/.env ]]
+## Train Manager
+if [[ "${ENABLED_TRAIN_MANAGER}" == true && ! -f ./config/train-manager/.env ]]
 then
-    cp ./config/result/example.env ./config/result/.env
+    cp ./config/train-manager/example.env ./config/train-manager/.env
 fi
 
 ## Frontend

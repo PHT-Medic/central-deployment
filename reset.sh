@@ -19,10 +19,10 @@ if [ -n "${DOCKER_VOLUME_ID_API}" ]; then
     docker volume rm "${DOCKER_VOLUME_NAME_API}"
 fi
 
-DOCKER_VOLUME_RESULT_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_NAME_RESULT}"$)
-if [ -z "${DOCKER_VOLUME_RESULT_ID}" ]; then
-    echo "Removing docker result-service volume..."
-    docker volume rm "${DOCKER_VOLUME_RESULT_ID}"
+DOCKER_VOLUME_ID_TRAIN_MANAGER=$(docker volume ls -qf name=^"${DOCKER_VOLUME_NAME_TRAIN_MANAGER}"$)
+if [ -z "${DOCKER_VOLUME_ID_TRAIN_MANAGER}" ]; then
+    echo "Removing docker train-manager volume..."
+    docker volume rm "${DOCKER_VOLUME_ID_TRAIN_MANAGER}"
 fi
 
 
