@@ -12,25 +12,25 @@ function usageAndExit() {
 UI="${ENABLED_UI}"
 REALTIME="${ENABLED_REALTIME}"
 API="${ENABLED_API}"
-TRAIN-MANAGER="${ENABLED_TRAIN_MANAGER}"
+TRAIN_MANAGER="${ENABLED_TRAIN_MANAGER}"
 
 if [[ -n "$1" ]]; then
     UI=false
     REALTIME=false
     API=false
-    TRAIN-MANAGER=false
+    TRAIN_MANAGER=false
 
     while [ "$1" != '' ]; do
         case "${1}" in
             ui) UI=true && shift;;
             realtime) REALTIME=true && shift;;
             api) API=true && shift;;
-            train-manager) TRAIN-MANAGER=true && shift;;
+            train-manager) TRAIN_MANAGER=true && shift;;
             *) echo "Unknown app: ${1}" && shift;;
         esac
     done
 
-    if [[ -z "${UI}" && -z "${API}" && -z "${REALTIME}" && -z "${TRAIN-MANAGER}" ]]; then
+    if [[ -z "${UI}" && -z "${API}" && -z "${REALTIME}" && -z "${TRAIN_MANAGER}" ]]; then
         usageAndExit
     fi
 fi
@@ -68,7 +68,7 @@ if [[ "${REALTIME}" == true ]]; then
     fi
 fi
 
-if [[ "${TRAIN-MANAGER}" == true ]]; then
+if [[ "${TRAIN_MANAGER}" == true ]]; then
     DOCKER_ID_TRAIN_MANAGER=$(docker ps -qf name=^"${DOCKER_NAME_TRAIN_MANAGER}"$)
     if [ -n "${DOCKER_ID_TRAIN_MANAGER}" ]; then
         echo "stopping train-manager..."
