@@ -41,7 +41,7 @@ DOCKER_IMAGE_TAG="${DOCKER_IMAGE_TAG:-latest}"
 
 DB_ENABLED="${DB_ENABLED:-false}"
 DB_PORTS_EXPOSED="${DB_PORTS_EXPOSED:-false}"
-DB_VERSION="${DB_VERSION:-"5.7"}"
+DB_VERSION="${DB_VERSION:-"8.0"}"
 DB_USER_PASSWORD="${DB_USER_PASSWORD:-start123}"
 
 #######################################
