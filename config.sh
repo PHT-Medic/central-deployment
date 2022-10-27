@@ -60,7 +60,7 @@ MQ_USER_PASSWORD="${MQ_USER_PASSWORD:-start123}"
 
 REDIS_ENABLED="${REDIS_ENABLED:-false}"
 REDIS_PORTS_EXPOSED="${REDIS_PORTS_EXPOSED:-false}"
-REDIS_VERSION="${REDIS_VERSION:-"6.0-debian-10"}"
+REDIS_VERSION="${REDIS_VERSION:-"7.0-debian-10"}"
 
 #######################################
 ## VAULT Service
@@ -68,7 +68,7 @@ REDIS_VERSION="${REDIS_VERSION:-"6.0-debian-10"}"
 
 VAULT_ENABLED="${VAULT_ENABLED:-false}"
 VAULT_PORTS_EXPOSED="${VAULT_PORTS_EXPOSED:-false}"
-VAULT_VERSION="${VAULT_VERSION:-"1.9.2"}"
+VAULT_VERSION="${VAULT_VERSION:-"1.12.0"}"
 
 #######################################
 ## Project
