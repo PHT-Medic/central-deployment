@@ -44,6 +44,12 @@ then
     cp ./config/third-party/mq/example.env ./config/third-party/mq/.env
 fi
 
+## Minio
+if [[ "${MINIO_ENABLED}" == true &&  ! -f ./config/third-party/minio/.env ]]
+then
+    cp ./config/third-party/minio/example.env ./config/third-party/minio/.env
+fi
+
 ## REDIS
 if [[ "${REDIS_ENABLED}" == true &&  ! -f ./config/third-party/redis/.env ]]
 then

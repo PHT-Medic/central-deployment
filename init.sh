@@ -45,6 +45,14 @@ if [[ "${MQ_ENABLED}" == true ]]; then
     fi
 fi
 
+if [[ "${MINIO_ENABLED}" == true ]]; then
+    DOCKER_VOLUME_MINIO_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_MINIO_NAME}"$)
+    if [ -z "${DOCKER_VOLUME_MINIO_ID}" ]; then
+        echo "Creating docker minio volume..."
+        docker volume create "${DOCKER_VOLUME_MINIO_NAME}"
+    fi
+fi
+
 if [[ "${VAULT_ENABLED}" == true ]]; then
     DOCKER_VOLUME_VAULT_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_VAULT_NAME}"$)
     if [ -z "${DOCKER_VOLUME_VAULT_ID}" ]; then

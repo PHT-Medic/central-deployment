@@ -26,6 +26,7 @@ DOCKER_NAME_TRAIN_MANAGER="${DOCKER_NAME_TRAIN_MANAGER:-central-train-manager}"
 
 DOCKER_NAME_DB="${DOCKER_NAME_DB:-central-db}"
 DOCKER_NAME_MQ="${DOCKER_NAME_MQ:-central-mq}"
+DOCKER_NAME_MINIO="${DOCKER_NAME_MINIO:-central-minio}"
 DOCKER_NAME_REDIS="${DOCKER_NAME_REDIS:-central-redis}"
 DOCKER_NAME_VAULT="${DOCKER_NAME_VAULT:-central-vault}"
 
@@ -53,6 +54,14 @@ MQ_PORTS_EXPOSED="${MQ_PORTS_EXPOSED:-false}"
 MQ_VERSION="${MQ_VERSION:-"latest"}"
 MQ_USER_NAME="${MQ_USER_NAME:-admin}"
 MQ_USER_PASSWORD="${MQ_USER_PASSWORD:-start123}"
+
+#######################################
+## Minio Service
+#######################################
+
+MINIO_ENABLED="${MINIO_ENABLED:-false}"
+MINIO_PORTS_EXPOSED="${MINIO_PORTS_EXPOSED:-false}"
+MINIO_VERSION="${MINIO_VERSION:-"latest"}"
 
 #######################################
 ## Redis Service

@@ -27,12 +27,14 @@ shift
 
 DB_SERVICE="${DB_ENABLED}"
 MQ_SERVICE="${MQ_ENABLED}"
+MINIO_SERVICE="${MINIO_ENABLED}"
 REDIS_SERVICE="${REDIS_ENABLED}"
 VAULT_SERVICE="${VAULT_ENABLED}"
 
 if [[ -n "$1" ]]; then
     DB_SERVICE=false
     MQ_SERVICE=false
+    MINIO_SERVICE=false
     REDIS_SERVICE=false
     VAULT_SERVICE=false
 
@@ -40,19 +42,19 @@ if [[ -n "$1" ]]; then
         case "${1}" in
             db) DB_SERVICE=true && shift;;
             mq) MQ_SERVICE=true && shift;;
+            minio) MINIO_SERVICE=true && shift;;
             redis) REDIS_SERVICE=true && shift;;
             vault) VAULT_SERVICE=true && shift;;
             *) echo "Unknown service: ${1}" && shift;;
         esac
     done
 
-    if [[ -z "${DB_SERVICE}" && -z "${MQ_SERVICE}" && -z "${REDIS_SERVICE}" && -z "${VAULT_SERVICE}" ]]; then
+    if [[ -z "${DB_SERVICE}" && -z "${MQ_SERVICE}" && -z "${MINIO_SERVICE}" && -z "${REDIS_SERVICE}" && -z "${VAULT_SERVICE}" ]]; then
         usageAndExit
     fi
 fi
 
 if [[ "${DB_SERVICE}" == true ]]; then
-
     case "${COMMAND}" in
         start) source ./third-party/db/start.sh && startDB;;
         stop) source ./third-party/db/stop.sh && stopDB;;
@@ -63,6 +65,13 @@ if [[ "${MQ_SERVICE}" == true ]]; then
     case "${COMMAND}" in
         start) source ./third-party/mq/start.sh && startMQ;;
         stop) source ./third-party/mq/stop.sh && stopMQ;;
+    esac
+fi
+
+if [[ "${MINIO_SERVICE}" == true ]]; then
+    case "${COMMAND}" in
+        start) source ./third-party/minio/start.sh && startMinio;;
+        stop) source ./third-party/minio/stop.sh && stopMinio;;
     esac
 fi
 
