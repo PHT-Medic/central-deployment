@@ -91,7 +91,7 @@ if [[ "${ENABLED_API}" == true ]]; then
         -v "${DOCKER_VOLUME_NAME_API}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/api/writable \
         --network="${DOCKER_NETWORK_NAME}" \
         --env-file ./config/api/.env \
-        "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" cli setup
+        "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" cli start
 fi
 
 echo "completed."
