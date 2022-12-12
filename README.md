@@ -1,13 +1,39 @@
-# UI Deployment 🚀
-This repository contains deployment utils to deploy a UI.
+# Central Deployment 🚀
+This package requires `docker` to be installed on the host machine.
 
 ## Installation
-This package requires `docker` & `webhook` to be installed on the host machine.
+```shell
+git clone https://github.com/PHT-Medic/central-deployment
+cd central-deployment
+```
 
 ## Configuration
-In the `config` directory copy all `.env` files and replace them without the **example** prefix in the name,
-to configure frontend, backend and the third party services.
+
+```shell
+$ ./env.sh
+```
+
+This command will create environment files in the following directories:
+- config/.env
+- config/api/.env
+- config/realtime/.env
+- config/third-party/.env
+- config/train-manager/.env
+- config/ui/.env
+
 Change the values to your needs.
+
+The following values need to be changed before running the setup script!
+- config/api/.env
+  - `API_URL`
+  - `APP_URL`
+- config/realtime/.env
+  - `API_URL`
+- config/train-manager/.env
+  - `API_URL`
+- config/ui/.env
+  - `API_URL`
+  - `REALTIME_URL`
 
 ## Setup
 To set up everything just run the following command:
@@ -17,21 +43,18 @@ $ ./setup.sh
 This will download the docker image and run initial project setup 🔥.
 
 ## Usage
-Start 🛫 frontend, backend & third party services:
+Setup & Start 🛫
 ```
 $ ./third-party.sh start
 $ ./start.sh
 ```
-Stop 🛬 frontend, backend & third party services:
+Stop 🛬
 ```
 $ ./third-party.sh stop
 $ ./stop.sh
 ```
-Update 💺images and service:
-```
-$ ./update.sh
-```
-Reset 🪂 service:
+
+Reset 🪂
 ```
 $ ./reset.sh
 ```
