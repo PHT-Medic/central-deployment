@@ -16,17 +16,6 @@ $ ./setup.sh
 ```
 This will download the docker image and run initial project setup 🔥.
 
-### Webhook
-The linux package `webhook` is required to run the configured webhooks.
-
-To set up and register the GitHub webhook, run the following command:
-```
-$ ./webhook.sh
-```
-
-Now you are good to go and can either wait for the Webhook to
-build and deploy the UI or manually start the Services.
-
 ## Usage
 Start 🛫 frontend, backend & third party services:
 ```
