@@ -88,7 +88,7 @@ fi
 
 if [[ "${ENABLED_API}" == true ]]; then
     docker run \
-        -v "${DOCKER_VOLUME_NAME_API}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/api/writable \
+        -v "${DOCKER_VOLUME_NAME_API}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/api/writable \
         --network="${DOCKER_NETWORK_NAME}" \
         --env-file ./config/api/.env \
         "${DOCKER_IMAGE_NAME}":"${DOCKER_IMAGE_TAG}" cli start

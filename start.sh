@@ -63,7 +63,7 @@ if [[ "${API}" == true ]]; then
         echo "starting api-server..."
         docker run \
             -d \
-            -v "${DOCKER_VOLUME_NAME_API}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/api/writable \
+            -v "${DOCKER_VOLUME_NAME_API}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/api/writable \
             -p "${PORT_API}":3000 \
             --restart=always \
             --network="${DOCKER_NETWORK_NAME}" \
@@ -99,7 +99,7 @@ if [[ "${TRAIN_MANAGER}" == true ]]; then
         docker run \
             -d \
             -v /var/run/docker.sock:/var/run/docker.sock \
-            -v "${DOCKER_VOLUME_NAME_TRAIN_MANAGER}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/backend/train-manager/writable \
+            -v "${DOCKER_VOLUME_NAME_TRAIN_MANAGER}":"${DOCKER_CONTAINER_PROJECT_PATH}"packages/train-manager/writable \
             -p "${PORT_TRAIN_MANAGER}":3000 \
             --restart=always \
             --network="${DOCKER_NETWORK_NAME}" \
