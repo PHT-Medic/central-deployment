@@ -58,6 +58,22 @@ if [[ "${UI}" == true ]]; then
 fi
 
 if [[ "${API}" == true ]]; then
+    if [[ "${DB_ENABLED}" == true ]]; then
+        DOCKER_DB_ID=$(docker ps -qf name=^"${DOCKER_NAME_DB}"$)
+        if [ -n "${DOCKER_DB_ID}" ]; then
+            while ! docker exec \
+                 "${DOCKER_NAME_DB}" \
+                 mysqladmin \
+                --user=root \
+                --password="${DB_USER_PASSWORD}" \
+                --host="${DOCKER_NAME_DB}" \
+                 ping --silent &> /dev/null ; do
+                echo "Waiting for db connection..."
+                sleep 2
+            done
+        fi
+    fi
+
     DOCKER_ID_API=$(docker ps -qf name=^"${DOCKER_NAME_API}"$)
     if [ -z "${DOCKER_ID_API}" ]; then
         echo "starting api-server..."
