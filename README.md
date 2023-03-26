@@ -26,7 +26,7 @@ Change the values to your needs.
 Don't forget to replace the placeholders with the actual values:
 - `[APP_URL]`: Web address (e.g. https://app.example.com/)
 - `[APP_API_URL]`: Web address (e.g. https://app.example.com/api/)
-- `[AUTH_API_URL]`: Web address of authup service (e.g. https://app.example.com/auth/)
+- `[AUTHUP_API_URL]`: Web address of authup service (e.g. https://app.example.com/auth/)
 
 The following values need to be changed before running the setup script!
 
@@ -34,12 +34,12 @@ The following values need to be changed before running the setup script!
 ```dotenv
 API_URL=[API_URL]
 APP_URL=[APP_URL]
-AUTH_API_URL=[AUTH_API_URL]
+AUTHUP_API_URL=[AUTHUP_API_URL]
 ```
 
 **`config/realtime/.env`**
 ```dotenv
-AUTH_API_URL=[AUTH_API_URL]
+AUTHUP_API_URL=[AUTHUP_API_URL]
 ```
 
 **`config/third-party/authup/.env`**
@@ -50,14 +50,14 @@ AUTHORIZE_REDIRECT_URL=[APP_URL]
 **`config/train-manager/.env`**
 ```dotenv
 API_URL=[API_URL]
-AUTH_API_URL=[AUTH_API_URL]
+AUTHUP_API_URL=[AUTHUP_API_URL]
 ```
 
 **`config/ui/.env`**
 ```dotenv
 API_URL=[API_URL]
 APP_URL=[APP_URL]
-AUTH_API_URL=[AUTH_API_URL]
+AUTHUP_API_URL=[AUTHUP_API_URL]
 ```
 
 ## Setup
