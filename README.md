@@ -17,23 +17,48 @@ This command will create environment files in the following directories:
 - config/.env
 - config/api/.env
 - config/realtime/.env
-- config/third-party/.env
+- config/third-party/authup/.env
 - config/train-manager/.env
 - config/ui/.env
 
 Change the values to your needs.
 
+Don't forget to replace the placeholders with the actual values:
+- `[APP_URL]`: Web address (e.g. https://app.example.com/)
+- `[APP_API_URL]`: Web address (e.g. https://app.example.com/api/)
+- `[AUTH_API_URL]`: Web address of authup service (e.g. https://app.example.com/auth/)
+
 The following values need to be changed before running the setup script!
-- config/api/.env
-  - `API_URL`
-  - `APP_URL`
-- config/realtime/.env
-  - `API_URL`
-- config/train-manager/.env
-  - `API_URL`
-- config/ui/.env
-  - `API_URL`
-  - `REALTIME_URL`
+
+**`config/api/.env`**
+```dotenv
+API_URL=[API_URL]
+APP_URL=[APP_URL]
+AUTH_API_URL=[AUTH_API_URL]
+```
+
+**`config/realtime/.env`**
+```dotenv
+AUTH_API_URL=[AUTH_API_URL]
+```
+
+**`config/third-party/authup/.env`**
+```dotenv
+AUTHORIZE_REDIRECT_URL=[APP_URL]
+```
+
+**`config/train-manager/.env`**
+```dotenv
+API_URL=[API_URL]
+AUTH_API_URL=[AUTH_API_URL]
+```
+
+**`config/ui/.env`**
+```dotenv
+API_URL=[API_URL]
+APP_URL=[APP_URL]
+AUTH_API_URL=[AUTH_API_URL]
+```
 
 ## Setup
 To set up everything just run the following command:
