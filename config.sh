@@ -13,6 +13,7 @@ DOCKER_NETWORK_NAME="${DOCKER_NETWORK_NAME:-central}"
 DOCKER_VOLUME_NAME_API="${DOCKER_VOLUME_NAME_API:-central-api}"
 DOCKER_VOLUME_NAME_TRAIN_MANAGER="${DOCKER_VOLUME_NAME_TRAIN_MANAGER:-central-train-manager}"
 
+DOCKER_VOLUME_AUTHUP_NAME="${DOCKER_VOLUME_AUTHUP_NAME:-central-auth}"
 DOCKER_VOLUME_DB_NAME="${DOCKER_VOLUME_DB_NAME:-central-db}"
 DOCKER_VOLUME_MQ_NAME="${DOCKER_VOLUME_MQ_NAME:-central-mq}"
 DOCKER_VOLUME_MINIO_NAME="${DOCKER_VOLUME_MINIO_NAME:-central-minio}"
@@ -25,6 +26,7 @@ DOCKER_NAME_API="${DOCKER_NAME_API:-central-api}"
 DOCKER_NAME_REALTIME="${DOCKER_NAME_REALTIME:-central-realtime}"
 DOCKER_NAME_TRAIN_MANAGER="${DOCKER_NAME_TRAIN_MANAGER:-central-train-manager}"
 
+DOCKER_NAME_AUTHUP="${DOCKER_NAME_AUTHUP:-central-auth}"
 DOCKER_NAME_DB="${DOCKER_NAME_DB:-central-db}"
 DOCKER_NAME_MQ="${DOCKER_NAME_MQ:-central-mq}"
 DOCKER_NAME_MINIO="${DOCKER_NAME_MINIO:-central-minio}"
@@ -36,6 +38,14 @@ DOCKER_CONTAINER_PROJECT_PATH="${DOCKER_CONTAINER_PROJECT_PATH:-"/usr/src/projec
 
 ## Image
 DOCKER_IMAGE_TAG="${DOCKER_IMAGE_TAG:-latest}"
+
+#######################################
+## Authup Service
+#######################################
+
+AUTHUP_ENABLED="${AUTHUP_ENABLED:-true}"
+AUTHUP_PORTS_EXPOSED="${AUTHUP_PORTS_EXPOSED:-true}"
+AUTHUP_VERSION="${AUTHUP_VERSION:-"latest"}"
 
 #######################################
 ## DB Service

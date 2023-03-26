@@ -32,6 +32,12 @@ then
     cp ./config/ui/example.env ./config/ui/.env
 fi
 
+## Auth
+if [[ "${AUTHUP_ENABLED}" == true &&  ! -f ./config/third-party/authup/.env ]]
+then
+    cp ./config/third-party/authup/example.env ./config/third-party/authup/.env
+fi
+
 ## DB
 if [[ "${DB_ENABLED}" == true &&  ! -f ./config/third-party/db/.env ]]
 then

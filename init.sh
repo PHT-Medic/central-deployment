@@ -29,6 +29,14 @@ if [[ "${ENABLED_TRAIN_MANAGER}" == true ]]; then
     fi
 fi
 
+if [[ "${AUTHUP_ENABLED}" == true ]]; then
+    DOCKER_VOLUME_AUTHUP_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_AUTHUP_NAME}"$)
+    if [ -z "${DOCKER_VOLUME_AUTHUP_ID}" ]; then
+        echo "Creating docker auth volume..."
+        docker volume create "${DOCKER_VOLUME_AUTHUP_NAME}"
+    fi
+fi
+
 if [[ "${DB_ENABLED}" == true ]]; then
     DOCKER_VOLUME_DB_ID=$(docker volume ls -qf name=^"${DOCKER_VOLUME_DB_NAME}"$)
     if [ -z "${DOCKER_VOLUME_DB_ID}" ]; then
