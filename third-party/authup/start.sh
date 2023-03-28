@@ -15,17 +15,17 @@ function startAuthup() {
 
         args=()
 
-        if [[ "${VAULT_PORTS_EXPOSED}" == true ]]; then
+        if [[ "${AUTHUP_PORTS_EXPOSED}" == true ]]; then
            args+=(-p 3010:3010)
         fi
 
         docker run \
             -d \
-            -v "${DOCKER_VOLUME_VAULT_NAME}":/usr/src/app/writable \
+            -v "${DOCKER_VOLUME_AUTHUP_NAME}":/usr/src/app/writable \
             "${args[@]}" \
             --network "${DOCKER_NETWORK_NAME}" \
             --name "${DOCKER_NAME_AUTHUP}" \
             --env-file=./config/third-party/authup/.env \
-             vault:"${AUTHUP_VERSION}"
+             tada5hi/authup-server:"${AUTHUP_VERSION}"
     fi
 }
