@@ -59,8 +59,8 @@ fi
 
 if [[ "${AUTHUP_SERVICE}" == true ]]; then
     case "${COMMAND}" in
-        start) source ./third-party/auth/start.sh && startAuthup;;
-        stop) source ./third-party/auth/stop.sh && stopAuthup;;
+        start) source ./third-party/authup/start.sh && startAuthup;;
+        stop) source ./third-party/authup/stop.sh && stopAuthup;;
     esac
 fi
 
