@@ -10,20 +10,20 @@ function startAuthup() {
         echo "Service authup is already running."
     else
         if [[ "${DB_ENABLED}" == true ]]; then
-                DOCKER_DB_ID=$(docker ps -qf name=^"${DOCKER_NAME_DB}"$)
-                if [ -n "${DOCKER_DB_ID}" ]; then
-                    while ! docker exec \
-                         "${DOCKER_NAME_DB}" \
-                         mysqladmin \
-                        --user=root \
-                        --password="${DB_USER_PASSWORD}" \
-                        --host="${DOCKER_NAME_DB}" \
-                         ping --silent &> /dev/null ; do
-                        echo "Waiting for db connection..."
-                        sleep 2
-                    done
-                fi
+            DOCKER_DB_ID=$(docker ps -qf name=^"${DOCKER_NAME_DB}"$)
+            if [ -n "${DOCKER_DB_ID}" ]; then
+                while ! docker exec \
+                     "${DOCKER_NAME_DB}" \
+                     mysqladmin \
+                    --user=root \
+                    --password="${DB_USER_PASSWORD}" \
+                    --host="${DOCKER_NAME_DB}" \
+                     ping --silent &> /dev/null ; do
+                    echo "Waiting for db connection..."
+                    sleep 2
+                done
             fi
+        fi
 
         echo "Service authup starting..."
 
