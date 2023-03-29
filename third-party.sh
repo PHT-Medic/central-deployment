@@ -25,29 +25,29 @@ fi
 
 shift
 
-AUTHUP_SERVICE="${AUTHUP_ENABLED}"
 DB_SERVICE="${DB_ENABLED}"
 MQ_SERVICE="${MQ_ENABLED}"
 MINIO_SERVICE="${MINIO_ENABLED}"
 REDIS_SERVICE="${REDIS_ENABLED}"
 VAULT_SERVICE="${VAULT_ENABLED}"
+AUTHUP_SERVICE="${AUTHUP_ENABLED}"
 
 if [[ -n "$1" ]]; then
-    AUTHUP_SERVICE=false
     DB_SERVICE=false
     MQ_SERVICE=false
     MINIO_SERVICE=false
     REDIS_SERVICE=false
     VAULT_SERVICE=false
+    AUTHUP_SERVICE=false
 
     while [ "$1" != '' ]; do
         case "${1}" in
-            auth) AUTHUP_SERVICE=true && shift;;
             db) DB_SERVICE=true && shift;;
             mq) MQ_SERVICE=true && shift;;
             minio) MINIO_SERVICE=true && shift;;
             redis) REDIS_SERVICE=true && shift;;
             vault) VAULT_SERVICE=true && shift;;
+            authup) AUTHUP_SERVICE=true && shift;;
             *) echo "Unknown service: ${1}" && shift;;
         esac
     done
@@ -55,13 +55,6 @@ if [[ -n "$1" ]]; then
     if [[ -z "${AUTHUP_SERVICE}" && -z "${DB_SERVICE}" && -z "${MQ_SERVICE}" && -z "${MINIO_SERVICE}" && -z "${REDIS_SERVICE}" && -z "${VAULT_SERVICE}" ]]; then
         usageAndExit
     fi
-fi
-
-if [[ "${AUTHUP_SERVICE}" == true ]]; then
-    case "${COMMAND}" in
-        start) source ./third-party/authup/start.sh && startAuthup;;
-        stop) source ./third-party/authup/stop.sh && stopAuthup;;
-    esac
 fi
 
 if [[ "${DB_SERVICE}" == true ]]; then
@@ -96,5 +89,12 @@ if [[ "${VAULT_SERVICE}" == true ]]; then
     case "${COMMAND}" in
         start) source ./third-party/vault/start.sh && startVault;;
         stop) source ./third-party/vault/stop.sh && stopVault;;
+    esac
+fi
+
+if [[ "${AUTHUP_SERVICE}" == true ]]; then
+    case "${COMMAND}" in
+        start) source ./third-party/authup/start.sh && startAuthup;;
+        stop) source ./third-party/authup/stop.sh && stopAuthup;;
     esac
 fi
