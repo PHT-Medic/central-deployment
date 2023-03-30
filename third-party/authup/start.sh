@@ -35,6 +35,8 @@ function startAuthup() {
            args+=(-p 3010:3000)
         fi
 
+        docker pull tada5hi/authup:"${AUTHUP_VERSION}"
+
         docker run \
             -d \
             -v "${DOCKER_VOLUME_AUTHUP_NAME}":/usr/src/app/writable \
