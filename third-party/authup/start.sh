@@ -32,7 +32,7 @@ function startAuthup() {
         args=()
 
         if [[ "${AUTHUP_PORTS_EXPOSED}" == true ]]; then
-           args+=(-p 3010:3010)
+           args+=(-p 3010:3000)
         fi
 
         docker run \
@@ -42,6 +42,6 @@ function startAuthup() {
             --network "${DOCKER_NETWORK_NAME}" \
             --name "${DOCKER_NAME_AUTHUP}" \
             --env-file=./config/third-party/authup/.env \
-             tada5hi/authup-server:"${AUTHUP_VERSION}"
+             tada5hi/authup:"${AUTHUP_VERSION}" api start
     fi
 }
