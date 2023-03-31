@@ -35,7 +35,7 @@ function startAuthup() {
            args+=(-p 3010:3000)
         fi
 
-        docker pull tada5hi/authup:"${AUTHUP_VERSION}"
+        docker pull ghcr.io/authup/authup:"${AUTHUP_VERSION}"
 
         docker run \
             -d \
@@ -44,6 +44,6 @@ function startAuthup() {
             --network "${DOCKER_NETWORK_NAME}" \
             --name "${DOCKER_NAME_AUTHUP}" \
             --env-file=./config/third-party/authup/.env \
-             tada5hi/authup:"${AUTHUP_VERSION}" api start
+             ghcr.io/authup/authup:"${AUTHUP_VERSION}" api start
     fi
 }
