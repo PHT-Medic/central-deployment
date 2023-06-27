@@ -25,8 +25,8 @@ Change the values to your needs.
 
 Don't forget to replace the placeholders with the actual values:
 - `[APP_URL]`: Web address (e.g. https://app.example.com/)
+- `[API_URL]`: Web address (e.g. https://app.example.com/api/)
 - `[REALTIME_URL]`: Web address (e.g. https://app.example.com/)
-- `[APP_API_URL]`: Web address (e.g. https://app.example.com/api/)
 - `[AUTHUP_API_URL]`: Web address of authup service (e.g. https://app.example.com/auth/)
 
 The following values need to be changed before running the setup script!
